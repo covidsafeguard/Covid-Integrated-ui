@@ -91,7 +91,6 @@
       "cordova-sqlite-storage": {},
       "cordova-plugin-geolocation": {},
       "cordova-plugin-file": {},
-      "cordova-plugin-dreamover-uid": {},
       "cordova-plugin-android-permissions": {},
       "cordova-plugin-unique-device-id2": {}
     },
