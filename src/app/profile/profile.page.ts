@@ -64,9 +64,9 @@ usermac: string = 'sample';
         this.csvData = parsedData.data;
       }
     })
-    this.usermac = (this.uid.MAC).toString();
+    this.usermac = this.uid.IMEI;
     if(this.usermac == 'sample')
-      alert('macnotfound');
+      alert('IMEI NOT FOUND');
     for(var k = 0; k < 100; k++){
       if(this.csvData[k][0] == this.uid.MAC){
         alert('MAC FOUND');
