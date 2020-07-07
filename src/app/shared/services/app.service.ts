@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import { HTTP } from '@ionic-native/http/ngx';
 @Injectable({
   providedIn: 'root'
 })
 export class AppService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private nativeHttp: HTTP) { }
 
   getCovidStatistics() {
     let url = 'https://api.covidindiatracker.com/total.json';
@@ -38,6 +38,6 @@ export class AppService {
       'Authorization': 'Basic MGE1OGNlYjgtNzRlMC00MmZhLTg1YzctY2Y2NzlkNzgzYWJl'
     });
     let options = { headers: headers };
-    return this.http.post('https://onesignal.com/api/v1/notifications', data, options);
+    return this.nativeHttp.post('https://onesignal.com/api/v1/notifications', data, options);
   }
 }
