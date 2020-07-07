@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
-import { Uid } from '@ionic-native/uid/ngx';
-import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+//import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
+//import { Uid } from '@ionic-native/uid/ngx';
+//import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { DbService } from './../services/db.service';
 import { ToastController } from '@ionic/angular';
@@ -17,7 +17,7 @@ export class ProfilePage implements OnInit {
   UniqueDeviceID:string;
   mainForm: FormGroup;
   Data: any[] = []
-  constructor(private uniqueDeviceID: UniqueDeviceID,private uid: Uid,private androidPermissions: AndroidPermissions,private db: DbService,
+  constructor(private db: DbService,
     public formBuilder: FormBuilder,
     private toast: ToastController,
     private router: Router) { 
