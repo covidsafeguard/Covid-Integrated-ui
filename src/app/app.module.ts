@@ -22,7 +22,7 @@ import { File } from '@ionic-native/file/ngx';
 //import { Uid } from '@ionic-native/uid/ngx';
 //import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
-
+import { OneSignal } from '@ionic-native/onesignal/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -41,7 +41,8 @@ import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
     //Uid,
     //AndroidPermissions,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    SQLitePorter
+    SQLitePorter,
+    OneSignal
   ],
   bootstrap: [AppComponent]
 })
