@@ -12,7 +12,7 @@ import { HttpClientModule }    from '@angular/common/http';
 import { AppService } from './shared/services/app.service';
 import { SharedModule } from './shared/shared.module';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { BluetoothService } from './bluetooth.service';
+
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { BLE } from '@ionic-native/ble/ngx';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
@@ -32,7 +32,6 @@ import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
     SplashScreen,
     AppService,
     InAppBrowser,
-    BluetoothService,
     LocalNotifications,
     BLE,
     File,

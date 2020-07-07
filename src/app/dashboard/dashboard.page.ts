@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AppService } from '../shared/services/app.service';
 import { Subscription } from '../../../node_modules/rxjs';
-import { BluetoothService } from '../bluetooth.service';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 
 @Component({
