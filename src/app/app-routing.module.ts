@@ -19,18 +19,12 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
-  {
-    path: 'user/:id',
-    loadChildren: () => import('./user/user.module').then( m => m.UserPageModule)
-  },
+
   {
     path: 'profile',
     loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
   },
-  {
-    path: 'user',
-    loadChildren: () => import('./user/user.module').then( m => m.UserPageModule)
-  },
+  
 ];
 
 @NgModule({

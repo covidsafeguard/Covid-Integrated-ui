@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { BluetoothService } from '../bluetooth.service';
 
 
 @Component({
@@ -10,9 +11,9 @@ export class HomePage {
 
   devices = [];
   errMsg: string;
-  constructor() {
-   
-   
+  constructor(private bt: BluetoothService) {
+    bt.findDevices();
+ 
   }                           
 
 }

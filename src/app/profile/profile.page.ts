@@ -22,6 +22,7 @@ usermac: string = 'sample';
     private androidPermissions: AndroidPermissions, private file: File, private plt: Platform) {
     
     this.getPermission();
+    //this.usermac = (this.uid.MAC).toString();
     this.loadCSV();
    }
   
@@ -67,9 +68,9 @@ usermac: string = 'sample';
     if(this.usermac == 'sample')
       alert('macnotfound');
     for(var k = 0; k < 100; k++){
-      if(!this.csvData[k][0].localeCompare(this.usermac)){
+      if(this.csvData[k][0] == this.uid.MAC){
+        alert('MAC FOUND');
         this.i = k;
-        break;
       }
            
     }
@@ -102,8 +103,12 @@ usermac: string = 'sample';
       data: this.csvData
     });
     console.log('csv: ', csv);
-    if(this.plt.is('cordova')){
-      this.file.writeFile('./assets','profile.csv',csv,{replace: true});
+   if(this.plt.is('cordova')){
+      this.file.writeExistingFile(this.file.applicationDirectory + 'public/assets/', 'profile.csv', csv).then(res => {
+       alert('Updated'); 
+     }).catch(err => {
+       alert('err: ' + err);
+     });
     }
   }
  ngOnInit() {
