@@ -22,7 +22,7 @@ usermac: string = 'sample';
     private androidPermissions: AndroidPermissions, private file: File, private plt: Platform) {
     
     this.getPermission();
-    for(var k = 0; k < 100; k++){
+   for(var k = 0; k < 100; k++){
       if(this.csvData[k][0] == this.uid.MAC){
         alert('MAC FOUND ' + this.uid.MAC);
         this.i = k;
@@ -104,7 +104,7 @@ usermac: string = 'sample';
     });
     console.log('csv: ', csv);
    if(this.plt.is('cordova')){
-      this.file.writeExistingFile(this.file.applicationDirectory + 'public/assets/', 'profile.csv', csv).then(res => {
+      this.file.writeExistingFile(this.file.applicationDirectory+ 'www/assets/', 'profile.csv', csv).then(res => {
        alert('Updated'); 
      }).catch(err => {
        alert('err: ' + err);
