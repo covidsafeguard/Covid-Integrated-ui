@@ -22,6 +22,12 @@ usermac: string = 'sample';
     private androidPermissions: AndroidPermissions, private file: File, private plt: Platform) {
     
     this.getPermission();
+    for(var k = 0; k < 100; k++){
+      if(this.csvData[k][0] == this.uid.MAC){
+        alert('MAC FOUND ' + this.uid.MAC);
+        this.i = k;
+      } 
+    }
     //this.usermac = (this.uid.MAC).toString();
     this.loadCSV();
    }
@@ -67,13 +73,7 @@ usermac: string = 'sample';
     this.usermac = this.uid.IMEI;
     if(this.usermac == 'sample')
       alert('IMEI NOT FOUND');
-    for(var k = 0; k < 100; k++){
-      if(this.csvData[k][0] == this.uid.MAC){
-        alert('MAC FOUND');
-        this.i = k;
-      }
-           
-    }
+    
   }
   changecovidstat(){
    if(this.csvData[this.i][6] == 'negative') {
