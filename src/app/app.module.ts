@@ -18,9 +18,9 @@ import { BLE } from '@ionic-native/ble/ngx';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { PapaParseModule } from 'ngx-papaparse';
 import { File } from '@ionic-native/file/ngx';
-//import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
-//import { Uid } from '@ionic-native/uid/ngx';
-//import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
+import { Uid } from '@ionic-native/uid/ngx';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
 import { OneSignal } from '@ionic-native/onesignal/ngx';
 @NgModule({
@@ -37,10 +37,9 @@ import { OneSignal } from '@ionic-native/onesignal/ngx';
     File,
     SQLite,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    //UniqueDeviceID,
-    //Uid,
-    //AndroidPermissions,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    UniqueDeviceID,
+    Uid,
+    AndroidPermissions,
     SQLitePorter,
     OneSignal
   ],

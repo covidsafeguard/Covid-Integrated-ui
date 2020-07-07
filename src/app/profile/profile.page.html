@@ -1,81 +1,49 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>profile</ion-title>
+    <ion-title>Your Profile</ion-title>
   </ion-toolbar>
 </ion-header>
-
+  
 <ion-content fullscreen>
   <ion-list lines="full">
-    <form [formGroup]="mainForm" (ngSubmit)="storeData()">
-      <ion-item>
-        <ion-label position="floating">Mac-ID</ion-label>
-        <ion-input formControlName="macid" type="text" required></ion-input>
+     <ion-item>
+        <ion-label position="floating">Mac-ID</ion-label><br>
+        <ion-input>{{ csvData[i][0] }}</ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Username</ion-label>
-        <ion-input formControlName="username" type="text" required></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="floating">First name</ion-label>
-        <ion-input formControlName="firstname" type="text" required>
-        </ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Last name</ion-label>
-        <ion-input formControlName="lastname" type="text" required>
-        </ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Phone Number</ion-label>
-        <ion-input formControlName="phoneno" type="text" required>
-        </ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Age</ion-label>
-        <ion-input formControlName="age" type="text" required>
-        </ion-input>
-      </ion-item>
-      <!-- Radio -->
-      <!-- Refer https://ionicframework.com/docs/api/radio -->
-      <ion-item>
-        <ion-label position="floating">Covid Status</ion-label>
-        <ion-input formControlName="covidstat" type="text" required>
-        </ion-input>
-      </ion-item>
-      <!-- Date picker -->
-      <!-- Refer https://ionicframework.com/docs/api/datetime -->
-      <ion-item>
-        <ion-label position="floating">Date of detection</ion-label>
-        <ion-input formControlName="dod" type="text" required>
-        </ion-input>
+        <ion-label position="floating">Username</ion-label><br>
+        <ion-input>{{ csvData[i][1] }}</ion-input>
       </ion-item>
 
-      <ion-row>
-        <ion-col>
-          <ion-button type="submit" color="primary" shape="full" expand="block">
-            Add User
-          </ion-button>
-        </ion-col>
-      </ion-row>
-    </form>
+      <ion-item>
+        <ion-label position="floating">First name</ion-label><br>
+        <ion-input>{{ csvData[i][2] }}</ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Last name</ion-label><br>
+        <ion-input>{{ csvData[i][3] }}</ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Phone Number</ion-label><br>
+        <ion-input>{{ csvData[i][4] }}</ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Age</ion-label><br>
+        <ion-input type="text">{{ csvData[i][5] }}</ion-input>
+      </ion-item>
+      <ion-item id= 'covida'>
+        <ion-label position="floating">Covid Status</ion-label><br>
+        <ion-input >{{ csvData[i][6] }}</ion-input>
+        <div class="item-note" item-end>
+          <ion-button type="submit" color="primary" (click) = "changecovidstat()" >Change Status</ion-button>
+        </div>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Date of detection</ion-label><br>
+        <ion-input>{{ csvData[i][7] }}</ion-input>
+      </ion-item>
   </ion-list>
 
-    <ion-list>
-    <ion-list-header>
-    User Family
-    </ion-list-header>
+  <div>{{ usermac }}</div>
 
-    <ion-item lines="inset" *ngFor="let data of Data">
-      <ion-label>
-        <h5>hihihihi {{data.firstname}}</h5>
-        <p>{{data.covidstat}}</p>
-      </ion-label>
-
-      <div class="item-note" item-end>
-        <ion-icon name="create" style="zoom:2.0" [routerLink]="['/user/', data.macid]"></ion-icon>        
-        
-      </div>
-    </ion-item>
-  </ion-list>
 </ion-content>

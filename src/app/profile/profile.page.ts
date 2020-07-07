@@ -1,91 +1,30 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Papa } from 'ngx-papaparse';
+import { File } from '@ionic-native/file/ngx';
 
-//import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
-//import { Uid } from '@ionic-native/uid/ngx';
-//import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
-import { FormGroup, FormBuilder } from "@angular/forms";
-import { DbService } from './../services/db.service';
-import { ToastController } from '@ionic/angular';
-import { Router } from "@angular/router";
-
+import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
+import { Uid } from '@ionic-native/uid/ngx';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { Platform } from '@ionic/angular';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-  UniqueDeviceID:string;
-  mainForm: FormGroup;
-  Data: any[] = []
-  constructor(private db: DbService,
-    public formBuilder: FormBuilder,
-    private toast: ToastController,
-    private router: Router) { 
-   // this.getPermission();
-  }
-
-  ngOnInit() {
-    this.db.dbState().subscribe((res) => {
-      if(res){
-        this.db.fetchUsers().subscribe(item => {
-          this.Data = item
-        })
-      }
-    });
+csvData: any[] = [];
+headerRow: any[] = [];
+i: number = 1;
+usermac: string = 'sample';
+  constructor(private http:HttpClient, private papa: Papa, private uniqueDeviceID: UniqueDeviceID,
+    private uid: Uid,
+    private androidPermissions: AndroidPermissions, private file: File, private plt: Platform) {
+    
+    this.getPermission();
+    this.loadCSV();
+   }
   
-    this.mainForm = this.formBuilder.group({
-      macid: [''],
-      username: [''],
-      firstn1ame: [''],
-      lastname: [''],
-      phoneno: [''],
-      age: [''],
-      covidstat: [''],
-      dod: ['']
-   })
-  }
-  storeData() {
-    this.db.addUser(
-      this.mainForm.value.macid1,
-      this.mainForm.value.username,
-      this.mainForm.value.firstname,
-      this.mainForm.value.lastname,
-      this.mainForm.value.phoneno,
-      this.mainForm.value.age,
-      this.mainForm.value.covidstat,
-      this.mainForm.value.dod
-    ).then((res) => {
-      this.mainForm.reset();
-    })
-  }
-  /*getUniqueDeviceID() {
-    this.uniqueDeviceID.get()
-      .then((uuid: any) => {
-        console.log(uuid);
-        this.UniqueDeviceID = uuid;
-      })
-      .catch((error: any) => {
-        console.log(error);
-        this.UniqueDeviceID = "Error! ${error}";
-      });
-  }
-
-
-  getID_UID(type){
-    if(type == "IMEI"){
-      return this.uid.IMEI;
-    }else if(type == "ICCID"){
-      return this.uid.ICCID;
-    }else if(type == "IMSI"){
-      return this.uid.IMSI;
-    }else if(type == "MAC"){
-      return this.uid.MAC;
-    }else if(type == "UUID"){
-      return this.uid.UUID;
-    }
-  }
-
-
   getPermission(){
     this.androidPermissions.checkPermission(
       this.androidPermissions.PERMISSION.READ_PHONE_STATE
@@ -94,7 +33,8 @@ export class ProfilePage implements OnInit {
         
       }else{
         this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.READ_PHONE_STATE).then(res => {
-          alert("Persmission Granted Please Restart App!");
+         
+          
         }).catch(error => {
           alert("Error! "+error);
         });
@@ -102,5 +42,71 @@ export class ProfilePage implements OnInit {
     }).catch(error => {
       alert("Error! "+error);
     });
-  }*/
+  }
+ 
+
+  private loadCSV(){
+    this.http.get('./assets/profile.csv',{
+      responseType : 'text'
+    }).subscribe(
+      data=>this.extractdata(data),
+      err=> console.log('error: ', err)
+    )
+  }
+  extractdata(res){
+    let csvData = res || '';
+    this.papa.parse(csvData, {
+      complete: parsedData=>{
+        console.log(parsedData);
+        console.log(parsedData.data.splice(0,1));
+        this.headerRow = parsedData.data.splice(0,1)[0];
+        this.csvData = parsedData.data;
+      }
+    })
+    this.usermac = (this.uid.MAC).toString();
+    if(this.usermac == 'sample')
+      alert('macnotfound');
+    for(var k = 0; k < 100; k++){
+      if(!this.csvData[k][0].localeCompare(this.usermac)){
+        this.i = k;
+        break;
+      }
+           
+    }
+  }
+  changecovidstat(){
+   if(this.csvData[this.i][6] == 'negative') {
+   this.csvData[this.i][6] = 'positive';
+   this.chandedod();
+   this.exportcsv();
+   alert('You have been declared COVID Positive');
+   }
+    else {
+      this.csvData[this.i][6] = 'negative';
+      this.chandedod();
+      this.exportcsv();
+      alert('You have been declared COVID Negative');
+    }
+  }
+  chandedod(){
+    if(this.csvData[this.i][6] == 'negative')
+      this.csvData[this.i][7] = 'NIL';
+    else{
+      var d = new Date();
+      this.csvData[this.i][7] = d.toString();
+    }
+  }
+  exportcsv(){
+    let csv = this.papa.unparse({
+      fields: this.headerRow,
+      data: this.csvData
+    });
+    console.log('csv: ', csv);
+    if(this.plt.is('cordova')){
+      this.file.writeFile('./assets','profile.csv',csv,{replace: true});
+    }
+  }
+ ngOnInit() {
+  }
+
 }
