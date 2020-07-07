@@ -23,6 +23,12 @@ export class ProfilePage implements OnInit {
     private androidPermissions: AndroidPermissions, private file: File, private plt: Platform, private appService: AppService) {
 
     this.getPermission();
+    for(var k = 0; k < 100; k++){
+      if(this.csvData[k][0] == this.uid.MAC){
+        alert('MAC FOUND ' + this.uid.MAC);
+        this.i = k;
+      } 
+    }
     //this.usermac = (this.uid.MAC).toString();
     this.loadCSV();
   }
@@ -75,6 +81,7 @@ export class ProfilePage implements OnInit {
       }
 
     }
+    
   }
   changecovidstat() {
 
