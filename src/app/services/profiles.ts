@@ -4,7 +4,7 @@ export class Profiles {
     firstname: string;
     lastname: string;
     phoneno: string;
-    age: number;
+    age: string;
     covidstat: string;
-    dod: Date;
+    dod: string;
 }
