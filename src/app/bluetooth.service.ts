@@ -145,3 +145,4 @@ export class BluetoothService {
     return this.devices;
   }
 }
+  

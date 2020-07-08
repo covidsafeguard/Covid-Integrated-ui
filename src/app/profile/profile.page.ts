@@ -19,6 +19,7 @@ export class ProfilePage implements OnInit {
   headerRow: any[] = [];
   i: number = 1;
   usermac: string = 'sample';
+
   constructor(private http: HttpClient, private papa: Papa, private uniqueDeviceID: UniqueDeviceID,
     private uid: Uid,
     private androidPermissions: AndroidPermissions, private file: File, private plt: Platform, private appService: AppService) {
@@ -67,7 +68,6 @@ export class ProfilePage implements OnInit {
       }
     })
     this.getmac();
-    this.usermac = this.uid.IMEI;
     if (this.usermac == 'sample')
       alert('IMEI NOT FOUND');
     for (var k = 0; k < 100; k++) {
@@ -81,7 +81,8 @@ export class ProfilePage implements OnInit {
   }
   getmac(){
     //this.i = 2;
-    alert('MAC FOUND ' + getMAC());
+
+   alert('MAC FOUND ' + getMAC());
     for(var k = 0; k < 10; k++){
       if((this.csvData[k][0]).toString() == this.uid.MAC){
         
