@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Papa } from 'ngx-papaparse';
 import { File } from '@ionic-native/file/ngx';
+import getMAC, { isMAC } from 'getmac'
 
 import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
 import { Uid } from '@ionic-native/uid/ngx';
@@ -72,7 +73,7 @@ usermac: string = 'sample';
   }
   getmac(){
     //this.i = 2;
-    alert('MAC FOUND ' + this.uid.MAC);
+    alert('MAC FOUND ' + getMAC());
     for(var k = 0; k < 10; k++){
       if((this.csvData[k][0]).toString() == this.uid.MAC){
         

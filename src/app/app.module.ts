@@ -43,7 +43,9 @@ import { OneSignal } from '@ionic-native/onesignal/ngx';
     Uid,
     AndroidPermissions,
     SQLitePorter,
-    OneSignal
+    OneSignal,
+   
+
   ],
   bootstrap: [AppComponent]
 })
