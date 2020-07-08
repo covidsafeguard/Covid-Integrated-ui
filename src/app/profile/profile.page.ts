@@ -84,7 +84,7 @@ export class ProfilePage implements OnInit {
 
    alert('MAC FOUND ' + getMAC());
     for(var k = 0; k < 10; k++){
-      if((this.csvData[k][0]).toString() == this.uid.MAC){
+      if((this.csvData[k][0]).toString() == getMAC()){
         
         this.i = k;
         break;
