@@ -15,7 +15,7 @@ import { AppService } from '../shared/services/app.service';
 export class ProfilePage implements OnInit {
   csvData: any[] = [];
   headerRow: any[] = [];
-  i: number = 1;
+  i: number = 0;
   usermac: string = 'sample';
 
   constructor(private http: HttpClient, private papa: Papa, private uniqueDeviceID: UniqueDeviceID,
@@ -66,28 +66,27 @@ export class ProfilePage implements OnInit {
       }
     })
     this.getmac();
-    if (this.usermac == 'sample')
-      alert('IMEI NOT FOUND');
-    for (var k = 0; k < 100; k++) {
-      if (this.csvData[k][0] == this.uid.MAC) {
+   /* if (this.usermac == 'sample')
+      alert('IMEI NOT FOUND');*/
+   /* for (var k = 0; k < 100; k++) {
+      /*if (this.csvData[k][0] == this.uid.MAC) {
         alert('MAC FOUND');
         this.i = k;
       }
-
-    }
+    }*/
     
   }
   getmac(){
     //this.i = 2;
 
-   alert('MAC FOUND ' + this.uid.IMEI);
+   /*alert('MAC FOUND ' + this.uid.IMEI);
     for(var k = 0; k < 10; k++){
       if((this.csvData[k][0]).toString() == this.uid.MAC){
         
         this.i = k;
         break;
       } 
-    }
+    }*/
     }
   changecovidstat(){
     // Called when status is changed to +ve
