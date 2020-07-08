@@ -23,12 +23,6 @@ export class ProfilePage implements OnInit {
     private androidPermissions: AndroidPermissions, private file: File, private plt: Platform, private appService: AppService) {
 
     this.getPermission();
-    for(var k = 0; k < 100; k++){
-      if(this.csvData[k][0] == this.uid.MAC){
-        alert('MAC FOUND ' + this.uid.MAC);
-        this.i = k;
-      } 
-    }
     //this.usermac = (this.uid.MAC).toString();
     this.loadCSV();
   }
@@ -71,6 +65,7 @@ export class ProfilePage implements OnInit {
         this.csvData = parsedData.data;
       }
     })
+    this.getmac();
     this.usermac = this.uid.IMEI;
     if (this.usermac == 'sample')
       alert('IMEI NOT FOUND');
@@ -83,20 +78,29 @@ export class ProfilePage implements OnInit {
     }
     
   }
-  changecovidstat() {
-
+  getmac(){
+    //this.i = 2;
+    alert('MAC FOUND ' + this.uid.MAC);
+    for(var k = 0; k < 10; k++){
+      if((this.csvData[k][0]).toString() == this.uid.MAC){
+        
+        this.i = k;
+        break;
+      } 
+    }
+    }
+  changecovidstat(){
     // Called when status is changed to +ve
     if (this.csvData[this.i][6] == 'negative') {
       // Push notification
       this.appService.pushNotification();
     }
-
-    if (this.csvData[this.i][6] == 'negative') {
-      this.csvData[this.i][6] = 'positive';
-      this.chandedod();
-      this.exportcsv();
-      alert('You have been declared COVID Positive');
-    }
+   if(this.csvData[this.i][6] == 'negative') {
+   this.csvData[this.i][6] = 'positive';
+   this.chandedod();
+   this.exportcsv();
+   alert('You have been declared COVID Positive');
+   }
     else {
       this.csvData[this.i][6] = 'negative';
       this.chandedod();
@@ -118,13 +122,13 @@ export class ProfilePage implements OnInit {
       data: this.csvData
     });
     console.log('csv: ', csv);
-    if (this.plt.is('cordova')) {
-      this.file.writeExistingFile(this.file.applicationDirectory + 'public/assets/', 'profile.csv', csv).then(res => {
-        alert('Updated');
-      }).catch(err => {
-        alert('err: ' + err);
-      });
-    }
+  /* if(this.plt.is('cordova')){
+      this.file.writeExistingFile(this.file.applicationDirectory+ 'www/assets/', 'profile.csv', csv).then(res => {
+       alert('Updated'); 
+     }).catch(err => {
+       alert('err: ' + err);
+     });
+    }*/
   }
   ngOnInit() {
   }
