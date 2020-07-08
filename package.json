@@ -37,7 +37,6 @@
     "@ionic-native/unique-device-id": "^5.27.0",
     "@ionic/angular": "^5.0.0",
     "cordova-android": "8.1.0",
-    "cordova-plugin-advanced-http": "^2.5.1",
     "cordova-plugin-android-permissions": "^1.0.2",
     "cordova-plugin-badge": "^0.8.8",
     "cordova-plugin-ble-central": "^1.2.5",
@@ -100,10 +99,7 @@
       "cordova-plugin-android-permissions": {},
       "cordova-plugin-unique-device-id2": {},
       "cordova-plugin-ionic-webview": {},
-      "onesignal-cordova-plugin": {},
-      "cordova-plugin-advanced-http": {
-        "OKHTTP_VERSION": "3.10.0"
-      }
+      "onesignal-cordova-plugin": {}
     },
     "platforms": [
       "android"
